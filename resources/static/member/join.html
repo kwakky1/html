@@ -71,25 +71,31 @@ footer {
 </head>
 <body>
 <header>
-  <h2>로그인</h2>
+  <h2>회원가입</h2>
 </header>
 
 <section>
   <nav>
     <ul>
-      <li><a id="a-first" href="member/join.html">Join</a></li>
-      <li><a id="a-second" href="#">Login</a></li>
-      <li><a id="a-third" href="#">List</a></li>
+      <li><a id="a-first" href="#">Join</a></li>
+      <li><a id="a-second" href="../index.html">Login</a></li>
+      <li><a id="a-third" href="#">....</a></li>
     </ul>
   </nav>
   
   <article>
    <form action="#">
+   	<label>NAME </label> <br>
+   	<input id="name" type="text"/> <br>
    	<label>ID </label> <br>
-   	<input id="userid" type="text"> <br>
+   	<input id="userid" type="text"/> <br>
    	<label>PASSWORD</label><br>
-   	<input id="password" type="text"><br>
-   	<input id="login-button" type="button" value="로그인">
+   	<input id="password" type="text"/><br>
+   	<label>SSN</label><br>
+   	<input id="ssn" type="text"/><br>
+   	<label>ADRESS</label><br>
+   	<input id="addr" type="text"/><br>
+   	<input id="join-button" type="button" value="회원가입">
    	<input id="cancel-button" type="button" value="취소">
    	
    </form>
@@ -101,37 +107,43 @@ footer {
 </footer>
 <script type="text/javascript">
 $('#a-first').click(function(){
+	alert('Login 클릭')
 })
 $('#a-second').click(function(){
+	alert('Join 클릭')
 })
 $('#a-third').click(function(){
-
+	alert('.... 클릭')
 })
-$('#login-button').click(function(){
+$('#join-button').click(function(){
+	let member = {name:$('#name').val(),
+		userid: $('#userid').val(),
+		password: $('#password').val(),
+		ssn: $('#ssn').val(),
+		addr: $('#addr').val()}
+	alert('입력된 주민번호 : '+ member.ssn)
 	$.ajax({
-		url:'/member/login',
+		url: '/member/join',
 		type: 'post',
-		data: JSON.stringify({userid:$('#userid').val(),
-		password:$('#password').val()}),
-		datatype: 'json',
+		data: JSON.stringify(member),
+		dataType: 'json',
 		contentType: 'application/json',
 		success: function(message){
-			if(message ==='SUCCESS'){
-				location.href = "grade/register.html"
+			if(message === 'SUCCESS'){
+				location.href="../index.html"	
 			}else {
-				alret('다시 로그인해주세요')
-				location.href = "index.html"
+				location.href="join.html"
 			}
+			
 		},
 		error: function(){
-			alert('Networking Error')
+			alert('회원가입 실패')
 		}
+		
 	})
 })
 $('#cancel-button').click(function(){
-	$.ajax({
-		
-	})
+	alert('취소 버튼 클릭')
 })
 </script>
 </body>
