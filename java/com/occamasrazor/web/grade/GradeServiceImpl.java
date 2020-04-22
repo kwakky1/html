@@ -1,5 +1,10 @@
 package com.occamasrazor.web.grade;
 
+import org.springframework.stereotype.Service;
+
+import com.occamasrazor.web.util.Credit;
+
+@Service
 public class GradeServiceImpl implements GradeService {
 	private Grade[] grades;
 	private int count;
@@ -15,41 +20,48 @@ public class GradeServiceImpl implements GradeService {
 
 	@Override
 	public Grade[] list() {
-		Grade[] grades = null;
-		
 		return grades;
 	}
 
 	@Override
-	public Grade detail(Grade grade) {
-		Grade detail = new Grade();
+	public Credit detail(String userid) {
+		Credit credit =null;
+		switch(average(userid)/10) {
+		case 10: case 9: credit = Credit.A;
+			break;
+		case 8: credit = Credit.B;
+			break;
+		case 7: credit = Credit.C;
+			break;
+		case 6: credit = Credit.D;
+			break;
+		case 5: credit = Credit.E;
+			break;
+		case 4: credit = Credit.F;
+			break;
+		default : credit = Credit.F;
+			break;
+		}
+		return credit;
+	}
+
+	
+
+	private int average(String userid) {
+		return total(userid)/4;
+	}
+	private int total(String userid) {
+		int total =0;
 		for(int i=0;i<count;i++) {
-			if(grade.getUserid().equals(grades[i].getUserid())) {
-				detail = grades[i];
-				break;
+			if(userid.equals(grades[i].getUserid())) {
+				total = Integer.parseInt(grades[i].getKorean())
+						+Integer.parseInt(grades[i].getEnglish())
+						+Integer.parseInt(grades[i].getMath())
+						+Integer.parseInt(grades[i].getJava());
 			}
 		}
-		return detail;
-	}
-
-	@Override
-	public Grade total(Grade grade) {
-		Grade total = new Grade();
 		return total;
 	}
-
-	@Override
-	public Grade average(Grade grade) {
-		Grade average = new Grade();
-		return average;
-	}
-
-	@Override
-	public Grade score(Grade grade) {
-		Grade score = new Grade();
-		return score;
-	}
-
 	@Override
 	public void update(Grade grade) {
 	}
@@ -58,5 +70,10 @@ public class GradeServiceImpl implements GradeService {
 	public void delete(Grade grade) {
 		
 	}
+	@Override
+	public int count() {
+		return count;
+	}
+	
 
 }

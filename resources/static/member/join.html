@@ -105,7 +105,7 @@ footer {
 <footer>
   <p>Footer</p>
 </footer>
-<script type="text/javascript">
+<script>
 $('#a-first').click(function(){
 	alert('Login 클릭')
 })
@@ -115,7 +115,8 @@ $('#a-second').click(function(){
 $('#a-third').click(function(){
 	alert('.... 클릭')
 })
-$('#join-button').click(function(){
+$('#join-button').click(e =>{
+	e.preventDefault()
 	let member = {name:$('#name').val(),
 		userid: $('#userid').val(),
 		password: $('#password').val(),
@@ -128,21 +129,21 @@ $('#join-button').click(function(){
 		data: JSON.stringify(member),
 		dataType: 'json',
 		contentType: 'application/json',
-		success: function(message){
-			if(message === 'SUCCESS'){
+		success: d =>{
+			if(d=== 'SUCCESS'){
 				location.href="../index.html"	
 			}else {
 				location.href="join.html"
 			}
-			
 		},
-		error: function(){
-			alert('회원가입 실패')
+		error: (request,status,error)=>{
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
 		}
 		
 	})
 })
-$('#cancel-button').click(function(){
+$('#cancel-button').click(e =>{
+	e.perventDefault()
 	alert('취소 버튼 클릭')
 })
 </script>
