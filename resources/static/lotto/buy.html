@@ -71,28 +71,27 @@ footer {
 </head>
 <body>
 <header>
-  <h2>로그인</h2>
+  <h2>로또 구매</h2>
 </header>
 
 <section>
   <nav>
     <ul>
-      <li><a id="join_a" >Join</a></li>
-      <li><a id="login_a" >Login</a></li>
-      <li><a id="a-third" href="#">List</a></li>
+     
     </ul>
   </nav>
   
   <article>
    <form action="#">
    	<label>ID </label> <br>
-   	<input id="userid" type="text"> <br>
-   	<label>PASSWORD</label><br>
-   	<input id="password" type="text"><br>
-   	<input id="login-button" type="button" value="로그인">
-   	<input id="cancel-button" type="button" value="취소">
+   	<input id="userid" type="text"/> <br>
+   	<label>로또 번호 입력(,로 분리해주세요!)</label><br>
+   	<input id=lotto type="text"/><br>
    	
+   	<input id="buy-button" type="button" value="로또 구매">
+   	<input id="result-button" type="button" value="당첨 결과">
    </form>
+   <div id="result"></div>
   </article>
 </section>
 
@@ -100,45 +99,7 @@ footer {
   <p>Footer</p>
 </footer>
 <script type="text/javascript">
-$('#join_a')
-	.css('cursor','pointer')
-	.click(e=>{
-	e.preventDefault()
-	location.href="member/join.html"
-})
-$('#login_a')
-	.css('cursor','pointer')
-	.click(e=>{
-	e.preventDefault()
-	location.href="index.html"
-})
-$('#login-button').click(e =>{
-	$.ajax({
-		url:'/member/login',
-		type: 'post',
-		data: JSON.stringify({userid:$('#userid').val(),
-		password:$('#password').val()}),
-		datatype: 'json',
-		contentType: 'application/json',
-		success: d=> {
-			if(message ==='SUCCESS'){
-				location.href = "lotto/register.html"
-			}else {
-				alret('다시 로그인해주세요')
-				location.href = "index.html"
-			}
-		},
-		error: (request,status,error)=>{
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
-		}
-	})
-})
-$('#cancel-button').click(e=>{
-	e.preventDefault()
-	$.ajax({
-		
-	})
-})
+
 </script>
 </body>
 </html>

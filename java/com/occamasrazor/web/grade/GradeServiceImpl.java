@@ -62,6 +62,7 @@ public class GradeServiceImpl implements GradeService {
 		}
 		return total;
 	}
+	
 	@Override
 	public void update(Grade grade) {
 	}
