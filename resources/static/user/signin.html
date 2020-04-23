@@ -71,31 +71,22 @@ footer {
 </head>
 <body>
 <header>
-  <h2>회원가입</h2>
+  <h2>사용자 로그인</h2>
 </header>
 
 <section>
   <nav>
     <ul>
-      <li><a id="a-first" href="#">Join</a></li>
-      <li><a id="a-second" href="../index.html">Login</a></li>
-      <li><a id="a-third" href="#">....</a></li>
+      <li><a id="home_a" > 홈으로</a></li>
     </ul>
   </nav>
-  
   <article>
    <form action="#">
-   	<label>NAME </label> <br>
-   	<input id="name" type="text"/> <br>
    	<label>ID </label> <br>
-   	<input id="userid" type="text"/> <br>
+   	<input id="userid" type="text"> <br>
    	<label>PASSWORD</label><br>
-   	<input id="password" type="text"/><br>
-   	<label>SSN</label><br>
-   	<input id="ssn" type="text"/><br>
-   	<label>ADRESS</label><br>
-   	<input id="addr" type="text"/><br>
-   	<input id="join-button" type="button" value="회원가입">
+   	<input id="password" type="text"><br>
+   	<input id="signin-button" type="button" value="사용자 로그인">
    	<input id="cancel-button" type="button" value="취소">
    	
    </form>
@@ -105,47 +96,38 @@ footer {
 <footer>
   <p>Footer</p>
 </footer>
-<script>
-$('#a-first').click(function(){
-	alert('Login 클릭')
-})
-$('#a-second').click(function(){
-	alert('Join 클릭')
-})
-$('#a-third').click(function(){
-	alert('.... 클릭')
-})
-$('#join-button').click(e =>{
+<script type="text/javascript">
+
+$('#home_a')
+	.css('cursor','pointer')
+	.click(e=>{
+		e.preventDefault()
+		location.href="../index.html"
+	})
+$('#signin-button').click(e=>{
 	e.preventDefault()
-	let member = {name:$('#name').val(),
-		userid: $('#userid').val(),
-		password: $('#password').val(),
-		ssn: $('#ssn').val(),
-		addr: $('#addr').val()}
-	alert('입력된 주민번호 : '+ member.ssn)
 	$.ajax({
-		url: '/member/join',
-		type: 'post',
-		data: JSON.stringify(member),
-		dataType: 'json',
-		contentType: 'application/json',
-		success: d =>{
-			if(d=== 'SUCCESS'){
-				location.href="../index.html"	
-				}else {
-				location.href="join.html"
+		url:'/user/login',
+		type:'post',
+		data:JSON.stringify({
+			userid:$('#userid').val(),
+			password:$('#password').val()
+			}),
+		dataType:'json',
+		contentType:'application/json',
+		success : d=>{
+			if(d.messenger === 'SUCCESS'){
+				location.href = 'mypage.html'
+				} else {
+				location.href = 'signin.html'	
 			}
 		},
-		error: (request,status,error)=>{
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+		error : (r,x,e)=>{
+			alert(r.status)
 		}
-		
 	})
 })
-$('#cancel-button').click(e =>{
-	e.perventDefault()
-	alert('취소 버튼 클릭')
-})
+
 </script>
 </body>
 </html>

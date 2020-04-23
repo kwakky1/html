@@ -77,9 +77,11 @@ footer {
 <section>
   <nav>
     <ul>
-      <li><a id="join_a" >Join</a></li>
-      <li><a id="login_a" >Login</a></li>
-      <li><a id="a-third" href="#">List</a></li>
+      <li><a id="join_a" >관리자 등록</a></li>
+      <li><a id="login_a" >관리자 접속</a></li>
+      <li><a id="signup_a" >사용자 등록</a></li>
+      <li><a id="signin_a" >사용자 접속</a></li>
+      <li><a id="lotto_a" >로또 한방</a></li>
     </ul>
   </nav>
   
@@ -111,6 +113,24 @@ $('#login_a')
 	.click(e=>{
 	e.preventDefault()
 	location.href="index.html"
+})
+$('#signup_a')
+	.css('cursor','pointer')
+	.click(e=>{
+	e.preventDefault()
+	location.href="user/signup.html"
+})
+$('#signin_a')
+	.css('cursor','pointer')
+	.click(e=>{
+	e.preventDefault()
+	location.href="user/signup.html"
+})
+$('#lotto_a')
+	.css('cursor','pointer')
+	.click(e=>{
+	e.preventDefault()
+	location.href="lotto/buy.html"
 })
 $('#login-button').click(e =>{
 	$.ajax({

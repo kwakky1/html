@@ -112,7 +112,7 @@ $('#buy-button').click(e=>{
 		success: d=>{
 			alert(d)
 		},
-		error(request,status,error)=>{
+		error:(request,status,error)=>{
 			alert("code:"+request.status+"\n"+"message:"
 					+request.responseText+"\n"+"error:"+error)
 		}
