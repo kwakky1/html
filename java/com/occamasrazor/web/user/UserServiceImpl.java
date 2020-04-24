@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService{
 	}
 	@Override
 	public void add(User user) {
+		System.out.println("회원가입 확인  :"+ user);
 		map.put(user.getUserid(), user);
 	}
 	@Override
@@ -26,13 +27,27 @@ public class UserServiceImpl implements UserService{
 			User u =detail(user.getUserid());
 			if(user.getPassword().equals(u.getPassword())) {
 				returnUser =u;
+				System.out.println("로그인 :" + returnUser);
 			}
 		}
 		return returnUser;
 	}
 	@Override
 	public User detail(String userid) {
-		return (User) map.get(userid);
+		System.out.println("디테일: "+ userid);
+		User t = (User) map.get(userid);
+		System.out.println("map이후 " + t);
+		return t;
+	}
+	@Override
+	public boolean update(User user) {
+		map.replace(user.getUserid(), user);
+		return true;
+	}
+	@Override
+	public boolean remove(String userid) {
+		map.remove(userid);
+		return true;
 	}
 
 

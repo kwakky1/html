@@ -141,10 +141,10 @@ $('#login-button').click(e =>{
 		datatype: 'json',
 		contentType: 'application/json',
 		success: d=> {
-			if(message ==='SUCCESS'){
+			if(d ==='SUCCESS'){
 				location.href = "lotto/register.html"
 			}else {
-				alret('다시 로그인해주세요')
+				alert('다시 로그인해주세요')
 				location.href = "index.html"
 			}
 		},

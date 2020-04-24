@@ -103,7 +103,7 @@ $('#buy-button').click(e=>{
 	$.ajax({
 		url:'/lotto/buy',
 		type:'post',
-		data :JSON.stringify({
+		data:JSON.stringify({
 			userid : $('#userid').val(),
 			lotto : $('#lotto').vla()
 		}),

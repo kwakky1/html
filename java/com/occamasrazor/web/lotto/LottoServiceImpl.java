@@ -55,7 +55,6 @@ public class LottoServiceImpl implements LottoService {
 				}
 			return lottoResult;
 		}
-	
 		
 	@Override
 	public int[] random() {
@@ -64,6 +63,4 @@ public class LottoServiceImpl implements LottoService {
 		}
 		return numbers;
 	}
-
-
 }

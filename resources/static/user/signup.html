@@ -115,7 +115,8 @@ $('#signup-button').click(e=>{
 	$.ajax({
 		url:'/user/join',
 		type:'post',
-		data:JSON.stringify({name:$('#name').val(),
+		data:JSON.stringify({
+			name:$('#name').val(),
 			userid: $('#userid').val(),
 			password: $('#password').val(),
 			ssn: $('#ssn').val(),
