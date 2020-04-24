@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.occamasrazor.web.util.LottoResult;
 import com.occamasrazor.web.util.Messenger;
 
 @RestController
@@ -13,7 +14,8 @@ import com.occamasrazor.web.util.Messenger;
 public class LottoController {
 	@Autowired LottoService lottoService;
 	@PostMapping("/buy")
-	public void buy(@RequestBody Lotto lotto) {
-		lottoService.add(lotto);
+	public LottoResult buy(@RequestBody Lotto lotto) {
+		return lottoService.compare(lotto);
 	}
+	@PostMapping("/")
 }
