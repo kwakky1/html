@@ -17,5 +17,4 @@ public class LottoController {
 	public LottoResult buy(@RequestBody Lotto lotto) {
 		return lottoService.compare(lotto);
 	}
-	@PostMapping("/")
 }

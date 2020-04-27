@@ -122,7 +122,6 @@ $('#join-button').click(e =>{
 		password: $('#password').val(),
 		ssn: $('#ssn').val(),
 		addr: $('#addr').val()}
-	alert('입력된 주민번호 : '+ member.ssn)
 	$.ajax({
 		url: '/member/join',
 		type: 'post',
