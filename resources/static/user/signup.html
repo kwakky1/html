@@ -86,7 +86,7 @@ footer {
    	<label>NAME </label> <br>
    	<input id="name" type="text"/> <br>
    	<label>ID </label> <br>
-   	<input id="userid" type="text"/> <br>
+   	<input id="userid" type="text"/><input id="validation-button" type="button" value="중복확인"> <br>
    	<label>PASSWORD</label><br>
    	<input id="password" type="text"/><br>
    	<label>SSN</label><br>
@@ -135,6 +135,17 @@ $('#signup-button').click(e=>{
 		}
 	})
 	
+})
+$('#validation-button').click(e=>{
+	e.preventDefault()
+	$.getJSON('/user/check/'+ $('#userid').val(), d=>{
+		if(d === 'FAIL'){
+			alert('아이디 중복 다시 입력해주세요!')
+			$('#userid').val('')
+		} else{
+			alert('이 아이디는 사용이 가능합니다.')
+		}
+	})
 })
 </script>
 </body>

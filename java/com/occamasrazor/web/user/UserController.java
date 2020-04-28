@@ -48,6 +48,11 @@ public class UserController {
 		return returnMap;
 	
 	}
+	@GetMapping("/check/{userid}")
+	public Messenger check(@PathVariable String userid) {
+		return userService.confirm(userid);
+		
+	}
 	
 	@GetMapping("/detail/{userid}")
 	public User detail(@PathVariable String userid) {

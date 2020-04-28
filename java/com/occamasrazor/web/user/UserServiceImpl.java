@@ -18,6 +18,8 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
+import com.occamasrazor.web.util.Messenger;
+
 @Service
 public class UserServiceImpl implements UserService{
 	public final static String FILE_PATH = "C:\\Users\\bit2\\spring-workspace\\occamasrazor\\src\\main\\resources\\static\\user\\";
@@ -71,8 +73,6 @@ public class UserServiceImpl implements UserService{
 		Set set = map.entrySet();
 		@SuppressWarnings("rawtypes")
 		Iterator it = set.iterator();
-		System.out.println(">>>>>>>"+it);
-		System.out.println(">>>>>>>"+it.hasNext());
 		while(it.hasNext()) {
 			@SuppressWarnings("unchecked")
 			Map.Entry<String , User> e = (Entry<String, User>) it.next();
@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService{
 					String message = user.toString();
 					System.out.println(message);
 					writer.write(message);
+					writer.newLine();
 					writer.flush();
 		}catch(Exception e) {
 			
@@ -106,15 +107,16 @@ public class UserServiceImpl implements UserService{
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String message = "";
 			while((message = reader.readLine())!= null) {
-				list.add(message+"/");
+				list.add(message);
 			}
 			JOptionPane.showMessageDialog(null, list);
 			reader.close();
 		} catch(Exception e) {
 			
 		}
-		User u = new User();
+		User u =null;
 		for(int i =0;i<list.size();i++) {
+			u = new User();
 			String[] arr = list.get(i).split(",");
 			u.setUserid(arr[0]);
 			u.setPassword(arr[1]);
@@ -126,6 +128,17 @@ public class UserServiceImpl implements UserService{
 		}
 		return userlist;
 	}
-
-
+	@Override
+	public Messenger confirm(String userid) {
+		Messenger confirm = null;
+		for(int i=0;i<readFile().size();i++) {
+			if(readFile().get(i).getUserid().equals(userid)) {
+				confirm = Messenger.FAIL;
+				break;
+			}else {
+				confirm = Messenger.SUCCESS;
+			}	
+		}
+		return confirm;
+	}
 }
